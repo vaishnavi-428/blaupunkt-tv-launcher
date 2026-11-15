@@ -1457,7 +1457,15 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 return true;
             }
         }
-        if (!reordering) return super.dispatchKeyEvent(event);
+        if (!reordering) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                if (event.getAction() == KeyEvent.ACTION_UP) {
+                    onBackPressed();
+                }
+                return true;
+            }
+            return super.dispatchKeyEvent(event);
+        }
         if (dockEditing) return dispatchDockEdit(event);
         boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
         int code = event.getKeyCode();
